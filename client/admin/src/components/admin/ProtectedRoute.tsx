@@ -1,8 +1,11 @@
 
 import { Navigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
+const isAdmin = (user: any) => user && user.role === "admin";
+
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isAdmin, loading } = useAuth();
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
@@ -13,7 +16,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 
   if (!user) return <Navigate to="/login" replace />;
-  if (!isAdmin) {
+  if (!isAdmin(user)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center space-y-2">

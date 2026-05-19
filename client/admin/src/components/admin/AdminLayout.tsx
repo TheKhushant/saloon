@@ -1,6 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "./AdminSidebar";
 import { Outlet } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";

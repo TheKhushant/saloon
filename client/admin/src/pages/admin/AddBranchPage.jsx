@@ -1,5 +1,5 @@
+// pages/admin/AddBranchPage.tsx
 import { useState, useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,23 +12,41 @@ import { ArrowLeft } from "lucide-react";
 export default function AddBranchPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [vendors, setVendors] = useState<{ id: string; salon_name: string }[]>([]);
-  const [form, setForm] = useState({ vendor_id: "", branch_name: "", city: "", address: "", contact_number: "", status: "active" });
+  const [vendors, setVendors] = useState<Array<{ id: string, salon_name: string }>>([]);
 
+  const [form, setForm] = useState({
+    id: Date.now().toString(),
+    vendor_id: "",
+    branch_name: "",
+    city: "",
+    address: "",
+    contact_number: "",
+    status: "active",
+    created_at: new Date().toISOString()
+  });
+
+  // Load vendors from localStorage
   useEffect(() => {
-    supabase.from("vendors").select("id, salon_name").order("salon_name").then(({ data }) => setVendors(data || []));
+    const savedVendors = JSON.parse(localStorage.getItem("vendors") || "[]");
+    setVendors(savedVendors);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.vendor_id || !form.branch_name.trim() || !form.city.trim() || !form.address.trim() || !form.contact_number.trim()) {
+
+    if (!form.vendor_id || !form.branch_name.trim() || !form.city.trim() || 
+        !form.address.trim() || !form.contact_number.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
+
     setLoading(true);
-    const { error } = await supabase.from("branches").insert([form]);
+
+    const existingBranches = JSON.parse(localStorage.getItem("branches") || "[]");
+    existingBranches.push(form);
+    localStorage.setItem("branches", JSON.stringify(existingBranches));
+
     setLoading(false);
-    if (error) { toast.error("Failed to add branch: " + error.message); return; }
     toast.success("Branch added successfully");
     navigate("/admin/branches");
   };
@@ -38,37 +56,67 @@ export default function AddBranchPage() {
       <Button variant="ghost" className="gap-2" onClick={() => navigate("/admin/branches")}>
         <ArrowLeft className="h-4 w-4" /> Back to Branches
       </Button>
+
       <Card>
-        <CardHeader><CardTitle className="font-heading text-xl">Add Branch</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle className="font-heading text-xl">Add Branch</CardTitle>
+        </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label className="font-body">Vendor</Label>
+              <Label>Vendor</Label>
               <Select value={form.vendor_id} onValueChange={(v) => setForm({ ...form, vendor_id: v })}>
-                <SelectTrigger><SelectValue placeholder="Select a vendor" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a vendor" />
+                </SelectTrigger>
                 <SelectContent>
-                  {vendors.map((v) => <SelectItem key={v.id} value={v.id}>{v.salon_name}</SelectItem>)}
+                  {vendors.map((v) => (
+                    <SelectItem key={v.id} value={v.id}>
+                      {v.salon_name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
+
             <div className="space-y-2">
-              <Label className="font-body">Branch Name</Label>
-              <Input value={form.branch_name} onChange={(e) => setForm({ ...form, branch_name: e.target.value })} placeholder="e.g. Downtown Branch" />
+              <Label>Branch Name</Label>
+              <Input
+                value={form.branch_name}
+                onChange={(e) => setForm({ ...form, branch_name: e.target.value })}
+                placeholder="e.g. Downtown Branch"
+              />
             </div>
+
             <div className="space-y-2">
-              <Label className="font-body">City</Label>
-              <Input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="e.g. Dubai" />
+              <Label>City</Label>
+              <Input
+                value={form.city}
+                onChange={(e) => setForm({ ...form, city: e.target.value })}
+                placeholder="e.g. Dubai"
+              />
             </div>
+
             <div className="space-y-2">
-              <Label className="font-body">Address</Label>
-              <Input value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} placeholder="e.g. Downtown Blvd, Tower 3" />
+              <Label>Address</Label>
+              <Input
+                value={form.address}
+                onChange={(e) => setForm({ ...form, address: e.target.value })}
+                placeholder="e.g. Downtown Blvd, Tower 3"
+              />
             </div>
+
             <div className="space-y-2">
-              <Label className="font-body">Contact Number</Label>
-              <Input value={form.contact_number} onChange={(e) => setForm({ ...form, contact_number: e.target.value })} placeholder="e.g. +971501234567" />
+              <Label>Contact Number</Label>
+              <Input
+                value={form.contact_number}
+                onChange={(e) => setForm({ ...form, contact_number: e.target.value })}
+                placeholder="e.g. +971501234567"
+              />
             </div>
+
             <div className="space-y-2">
-              <Label className="font-body">Status</Label>
+              <Label>Status</Label>
               <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -78,7 +126,10 @@ export default function AddBranchPage() {
                 </SelectContent>
               </Select>
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>{loading ? "Saving..." : "Save Branch"}</Button>
+
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Saving..." : "Save Branch"}
+            </Button>
           </form>
         </CardContent>
       </Card>
