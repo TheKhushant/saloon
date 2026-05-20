@@ -20,7 +20,7 @@ import { useAuth } from "@/context/AuthContext";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z.string().min(1, "Password is required"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -41,15 +41,10 @@ export default function LoginPage() {
     setSubmitting(true);
     try {
       await login(values.email, values.password);
-      toast.success("Welcome back");
+      toast.success("Welcome back, Admin!");
       navigate("/", { replace: true });
-    } catch (err: unknown) {
-      const message =
-        (err as { response?: { data?: { message?: string } }; message?: string })?.response?.data
-          ?.message ??
-        (err as { message?: string })?.message ??
-        "Login failed";
-      toast.error(message);
+    } catch (err: any) {
+      toast.error(err.message || "Login failed");
     } finally {
       setSubmitting(false);
     }
@@ -62,8 +57,8 @@ export default function LoginPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Sparkles className="h-6 w-6" />
           </div>
-          <CardTitle className="text-2xl">Salon Admin</CardTitle>
-          <CardDescription>Sign in to manage your salon</CardDescription>
+          <CardTitle className="text-2xl">Admin Login</CardTitle>
+          <CardDescription>Sign in to access the admin dashboard</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -75,7 +70,11 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="admin@salon.com" {...field} />
+                      <Input 
+                        type="email" 
+                        placeholder="admin@booksalon.com" 
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -88,7 +87,11 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
+                      <Input 
+                        type="password" 
+                        placeholder="admin123" 
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,9 +103,13 @@ export default function LoginPage() {
               </Button>
             </form>
           </Form>
-          <p className="mt-4 text-center text-xs text-muted-foreground">
-            Connects to http://localhost:5000/api
-          </p>
+
+          {/* Demo Credentials Helper */}
+          <div className="mt-6 rounded-lg bg-secondary/50 p-3 text-xs">
+            <p className="font-medium text-muted-foreground mb-1">Demo Credentials:</p>
+            <p>Email: <code className="bg-background px-1 rounded">admin@booksalon.com</code></p>
+            <p>Password: <code className="bg-background px-1 rounded">admin123</code></p>
+          </div>
         </CardContent>
       </Card>
     </div>
