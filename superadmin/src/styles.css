@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-cream: var(--cream);
+  --color-dark: var(--dark);
+  --color-dark-soft: var(--dark-soft);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.978 0.003 67.792);
+  --foreground: oklch(0.215 0.013 48.105);
+  --card: oklch(0.993 0.001 67.810);
+  --card-foreground: oklch(0.215 0.013 48.105);
+  --popover: oklch(0.993 0.001 67.810);
+  --popover-foreground: oklch(0.215 0.013 48.105);
+  --primary: oklch(0.724 0.142 75.242);
+  --primary-foreground: oklch(1 0 89.876);
+  --secondary: oklch(0.948 0.005 67.768);
+  --secondary-foreground: oklch(0.269 0.018 48.026);
+  --muted: oklch(0.955 0.003 67.792);
+  --muted-foreground: oklch(0.553 0.023 48.291);
+  --accent: oklch(0.322 0.035 47.604);
+  --accent-foreground: oklch(0.963 0.005 67.760);
+  --destructive: oklch(0.579 0.214 27.166);
+  --destructive-foreground: oklch(1 0 89.876);
+  --border: oklch(0.910 0.008 67.725);
+  --input: oklch(0.910 0.008 67.725);
+  --ring: oklch(0.724 0.142 75.242);
+  --chart-1: oklch(0.724 0.142 75.242);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  --gold: oklch(0.724 0.142 75.242);
+  --gold-light: oklch(0.820 0.084 80.763);
+  --gold-dark: oklch(0.574 0.116 73.917);
+  --cream: oklch(0.963 0.005 67.760);
+  --dark: oklch(0.237 0.019 47.910);
+  --dark-soft: oklch(0.340 0.019 48.147);
+
+  --sidebar-background: oklch(0.237 0.019 47.910);
+  --sidebar-foreground: oklch(0.925 0.007 67.743);
+  --sidebar-primary: oklch(0.724 0.142 75.242);
+  --sidebar-primary-foreground: oklch(1 0 89.876);
+  --sidebar-accent: oklch(0.300 0.016 48.170);
+  --sidebar-accent-foreground: oklch(0.925 0.007 67.743);
+  --sidebar-border: oklch(0.320 0.017 48.157);
+  --sidebar-ring: oklch(0.724 0.142 75.242);
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+.dark {
+  --background: oklch(0.193 0.013 48.017);
+  --foreground: oklch(0.940 0.005 67.760);
+  --card: oklch(0.237 0.015 48.068);
+  --card-foreground: oklch(0.940 0.005 67.760);
+  --popover: oklch(0.237 0.015 48.068);
+  --popover-foreground: oklch(0.940 0.005 67.760);
+  --primary: oklch(0.724 0.142 75.242);
+  --primary-foreground: oklch(1 0 89.876);
+  --secondary: oklch(0.300 0.016 48.170);
+  --secondary-foreground: oklch(0.925 0.007 67.743);
+  --muted: oklch(0.300 0.016 48.170);
+  --muted-foreground: oklch(0.648 0.022 67.430);
+  --accent: oklch(0.761 0.109 79.588);
+  --accent-foreground: oklch(0.193 0.013 48.017);
+  --destructive: oklch(0.396 0.133 25.721);
+  --destructive-foreground: oklch(1 0 89.876);
+  --border: oklch(0.320 0.017 48.157);
+  --input: oklch(0.320 0.017 48.157);
+  --ring: oklch(0.724 0.142 75.242);
+  --chart-1: oklch(0.724 0.142 75.242);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  --sidebar-background: oklch(0.193 0.013 48.017);
+  --sidebar-foreground: oklch(0.940 0.005 67.760);
+  --sidebar-primary: oklch(0.724 0.142 75.242);
+  --sidebar-primary-foreground: oklch(1 0 89.876);
+  --sidebar-accent: oklch(0.300 0.016 48.170);
+  --sidebar-accent-foreground: oklch(0.940 0.005 67.760);
+  --sidebar-border: oklch(0.320 0.017 48.157);
+  --sidebar-ring: oklch(0.724 0.142 75.242);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
