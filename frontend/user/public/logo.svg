@@ -1,0 +1,53 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8CBA8"/>
+      <stop offset="50%" stop-color="#B4834F"/>
+      <stop offset="100%" stop-color="#6B4526"/>
+    </linearGradient>
+    <radialGradient id="discGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#1a1512"/>
+      <stop offset="100%" stop-color="#0a0807"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Aura rays -->
+  <g stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9">
+      <line x1="200.00" y1="94.00" x2="200.00" y2="66.00"/>
+      <line x1="239.94" y1="104.06" x2="248.56" y2="78.99"/>
+      <line x1="271.68" y1="128.32" x2="292.55" y2="107.45"/>
+      <line x1="295.94" y1="160.06" x2="321.01" y2="151.44"/>
+      <line x1="306.00" y1="200.00" x2="334.00" y2="200.00"/>
+      <line x1="295.94" y1="239.94" x2="321.01" y2="248.56"/>
+      <line x1="271.68" y1="271.68" x2="292.55" y2="292.55"/>
+      <line x1="239.94" y1="295.94" x2="248.56" y2="321.01"/>
+      <line x1="200.00" y1="306.00" x2="200.00" y2="334.00"/>
+      <line x1="160.06" y1="295.94" x2="151.44" y2="321.01"/>
+      <line x1="128.32" y1="271.68" x2="107.45" y2="292.55"/>
+      <line x1="104.06" y1="239.94" x2="78.99" y2="248.56"/>
+      <line x1="94.00" y1="200.00" x2="66.00" y2="200.00"/>
+      <line x1="104.06" y1="160.06" x2="78.99" y2="151.44"/>
+      <line x1="128.32" y1="128.32" x2="107.45" y2="107.45"/>
+      <line x1="160.06" y1="104.06" x2="151.44" y2="78.99"/>
+  </g>
+
+  <!-- Solid disc behind ring for contrast -->
+  <circle cx="200" cy="200" r="102" fill="url(#discGrad)"/>
+
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="102" fill="none" stroke="url(#goldGrad)" stroke-width="5"/>
+  <!-- Inner hairline ring for a jewelled, layered edge -->
+  <circle cx="200" cy="200" r="90" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Scissors emblem — the salon's craft, centered in the badge -->
+  <g transform="translate(133,133) scale(5.6)" fill="none" stroke="url(#goldGrad)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="6" cy="6" r="3"/>
+    <circle cx="6" cy="18" r="3"/>
+    <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+    <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+    <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+  </g>
+
+  <!-- Sparkle accent -->
+  <path fill="url(#goldGrad)" d="M 200 40 Q 202.3 53.3 216 56 Q 202.3 58.7 200 72 Q 197.7 58.7 184 56 Q 197.7 53.3 200 40 Z"/>
+</svg>

@@ -1,0 +1,832 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 20% 97%;
+    --foreground: 20 20% 10%;
+
+    --card: 30 25% 99%;
+    --card-foreground: 20 20% 10%;
+
+    --popover: 30 25% 99%;
+    --popover-foreground: 20 20% 10%;
+
+    --primary: 26 40% 39%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 15% 93%;
+    --secondary-foreground: 20 20% 15%;
+
+    --muted: 30 10% 94%;
+    --muted-foreground: 20 10% 45%;
+
+    --accent: 20 30% 20%;
+    --accent-foreground: 30 25% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 26 40% 39%;
+
+    --radius: 0.75rem;
+
+    --gold: 26 40% 39%;
+    --gold-light: 30 38% 64%;
+    --gold-dark: 24 42% 28%;
+    --cream: 30 25% 95%;
+    --dark: 20 15% 7%;
+    --dark-soft: 20 12% 15%;
+
+    --sidebar-background: 20 25% 12%;
+    --sidebar-foreground: 30 15% 90%;
+    --sidebar-primary: 26 40% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 20 15% 18%;
+    --sidebar-accent-foreground: 30 15% 90%;
+    --sidebar-border: 20 15% 20%;
+    --sidebar-ring: 26 40% 39%;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  .dark {
+    --background: 20 25% 8%;
+    --foreground: 30 15% 92%;
+    --card: 20 20% 12%;
+    --card-foreground: 30 15% 92%;
+    --popover: 20 20% 12%;
+    --popover-foreground: 30 15% 92%;
+    --primary: 26 40% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 20 15% 18%;
+    --secondary-foreground: 30 15% 90%;
+    --muted: 20 15% 18%;
+    --muted-foreground: 30 10% 55%;
+    --accent: 30 38% 64%;
+    --accent-foreground: 20 25% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 20 15% 20%;
+    --input: 20 15% 20%;
+    --ring: 26 40% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium 
+           transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-gold-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium 
+           transition-all duration-300 hover:bg-primary hover:text-primary-foreground;
+  }
+  .card-salon {
+    @apply bg-card rounded-xl overflow-hidden shadow-sm border border-border 
+           transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+  .section-heading {
+    font-family: var(--font-heading);
+    @apply text-3xl md:text-4xl font-bold text-foreground;
+  }
+  .gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+  }
+  .gradient-charcoal-brown {
+    background: linear-gradient(135deg, #2b2a28 0%, hsl(var(--gold-dark)) 55%, #6b6560 100%);
+  }
+  .gradient-dark {
+    background: linear-gradient(135deg, hsl(var(--dark)) 0%, hsl(var(--dark-soft)) 100%);
+  }
+  .glass {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+  }
+  .glass-dark {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+}
+
+@layer utilities {
+  @keyframes blob-float-a {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(6%, -8%) scale(1.08); }
+    66% { transform: translate(-5%, 6%) scale(0.95); }
+  }
+  @keyframes blob-float-b {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-7%, 5%) scale(0.92); }
+    66% { transform: translate(6%, -6%) scale(1.1); }
+  }
+  @keyframes blob-float-c {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.15); }
+  }
+  @keyframes sparkle-drift {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+  }
+  .animate-blob-a {
+    animation: blob-float-a 16s ease-in-out infinite;
+  }
+  .animate-blob-b {
+    animation: blob-float-b 20s ease-in-out infinite;
+  }
+  .animate-blob-c {
+    animation: blob-float-c 12s ease-in-out infinite;
+  }
+  .animate-sparkle {
+    animation: sparkle-drift linear infinite;
+  }
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .vertical-text {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* DreamSalon-inspired reveal and luxury hover effects */
+  .salon-reveal {
+    animation: salon-reveal 0.8s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  @keyframes salon-reveal {
+    from { opacity: 0; transform: translateY(42px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .luxury-image {
+    overflow: hidden;
+  }
+
+  .luxury-image img {
+    transition: transform 0.8s cubic-bezier(.22,1,.36,1), filter 0.6s ease;
+  }
+
+  .luxury-image:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.05);
+  }
+
+  .luxury-card {
+    transition: transform 0.45s cubic-bezier(.22,1,.36,1), box-shadow 0.45s ease, border-color 0.45s ease;
+  }
+
+  .luxury-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 50px rgba(0,0,0,.12);
+    border-color: hsl(var(--primary) / .45);
+  }
+
+  .underline-grow {
+    position: relative;
+  }
+
+  .underline-grow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width .35s ease;
+  }
+
+  .underline-grow:hover::after {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+  }
+}
+
+
+/* ===== Glam Aura luxury motion system ===== */
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
+
+@keyframes salonReveal {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes salonRevealLeft {
+  from { opacity: 0; transform: translate3d(-30px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes salonRevealRight {
+  from { opacity: 0; transform: translate3d(30px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes salonFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes salonShimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+/* Every content page gets a gentle entrance; individual cards receive staggered motion. */
+main, [data-page], .page-shell { animation: salonReveal .65s cubic-bezier(.22,1,.36,1) both; }
+section { animation: salonReveal .75s cubic-bezier(.22,1,.36,1) both; }
+.card-salon, article, [class*="group/card"] { animation: salonReveal .65s cubic-bezier(.22,1,.36,1) both; }
+
+/* Premium hover treatment used consistently throughout the application. */
+.card-salon, article, button, a, img { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease, background-color .35s ease; }
+.card-salon:hover, article:hover { transform: translateY(-6px); box-shadow: 0 22px 55px hsl(var(--dark) / .12); }
+img:not([class*="logo"]):hover { transform: scale(1.025); }
+button:not(:disabled):hover { transform: translateY(-2px); }
+button:not(:disabled):active { transform: translateY(0) scale(.98); }
+
+/* Brown luxury shine for primary CTAs. */
+.btn-gold, .btn-gold-outline { position: relative; overflow: hidden; }
+.btn-gold::after, .btn-gold-outline::after {
+  content: ""; position: absolute; inset: 0; width: 35%; transform: translateX(-180%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / .25), transparent);
+  transition: transform .7s ease; pointer-events: none;
+}
+.btn-gold:hover::after, .btn-gold-outline:hover::after { transform: translateX(420%) skewX(-18deg); }
+
+/* Soft image zoom + overlay for salon photography. */
+.salon-image-wrap { overflow: hidden; }
+.salon-image-wrap img { transition: transform .8s cubic-bezier(.22,1,.36,1); }
+.salon-image-wrap:hover img { transform: scale(1.07); }
+
+/* Respect accessibility preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+/* ===== Button animation library — attach any class below to a button/link ===== */
+
+/* 1. Glow — soft pulsing halo, good for primary hero CTAs */
+@keyframes btnGlowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / .45); }
+  50% { box-shadow: 0 0 0 10px hsl(var(--primary) / 0); }
+}
+.btn-glow {
+  animation: btnGlowPulse 2.2s ease-in-out infinite;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn-glow:hover { transform: translateY(-2px); }
+
+/* 2. Bounce — springy scale on hover/press, playful secondary actions */
+.btn-bounce {
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1);
+}
+.btn-bounce:hover { transform: scale(1.07) translateY(-2px); }
+.btn-bounce:active { transform: scale(.94); }
+
+/* 3. Shine sweep — diagonal light sweep across the button on hover */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ""; position: absolute; inset: 0; width: 35%; transform: translateX(-180%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / .35), transparent);
+  transition: transform .7s ease; pointer-events: none;
+}
+.btn-shine:hover::after { transform: translateX(420%) skewX(-18deg); }
+
+/* 4. Outline glow — border brightens and casts a soft glow on hover */
+.btn-outline-glow {
+  position: relative;
+  transition: box-shadow .35s ease, border-color .35s ease, color .35s ease, background-color .35s ease;
+}
+.btn-outline-glow:hover {
+  box-shadow: 0 0 0 3px hsl(var(--primary) / .18), 0 8px 24px hsl(var(--primary) / .25);
+  border-color: hsl(var(--primary));
+}
+
+/* 5. Underline slide — text-only link buttons with an expanding underline */
+.btn-underline-slide { position: relative; }
+.btn-underline-slide::after {
+  content: ""; position: absolute; left: 0; bottom: -3px; width: 0; height: 2px;
+  background: hsl(var(--primary)); transition: width .3s cubic-bezier(.22,1,.36,1);
+}
+.btn-underline-slide:hover::after { width: 100%; }
+
+/* 6. Press 3D — button dips down like a physical key on press */
+.btn-press-3d {
+  box-shadow: 0 4px 0 hsl(var(--primary) / .55);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-press-3d:hover { transform: translateY(-1px); box-shadow: 0 5px 0 hsl(var(--primary) / .55); }
+.btn-press-3d:active { transform: translateY(3px); box-shadow: 0 1px 0 hsl(var(--primary) / .55); }
+
+/* 7. Wobble — a quick playful shake, good for wishlist/like icon buttons */
+@keyframes btnWobble {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-8deg) scale(1.12); }
+  50% { transform: rotate(6deg) scale(1.12); }
+  75% { transform: rotate(-4deg) scale(1.08); }
+}
+.btn-wobble:hover { animation: btnWobble .5s ease; }
+
+/* 8. Ripple — expanding circle from the click point (paired with RippleButton JS) */
+.btn-ripple { position: relative; overflow: hidden; }
+.btn-ripple-circle {
+  position: absolute; border-radius: 9999px; transform: scale(0);
+  background: hsl(0 0% 100% / .45); animation: btnRippleExpand .6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes btnRippleExpand {
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* 9. Gradient shift — animated gradient position sweep, for premium gold CTAs */
+.btn-gradient-shift {
+  background-size: 200% 200%;
+  animation: btnGradientShift 3s ease infinite;
+}
+@keyframes btnGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 10. Slide fill — a color panel slides in from the left on hover, text stays put */
+.btn-slide-fill { position: relative; overflow: hidden; z-index: 0; }
+.btn-slide-fill::before {
+  content: ""; position: absolute; inset: 0; left: -100%;
+  background: hsl(var(--primary)); transition: left .35s cubic-bezier(.22,1,.36,1); z-index: -1;
+}
+.btn-slide-fill:hover::before { left: 0; }
+
+/* 11. Icon pop — icon inside the button scales & rotates slightly on hover */
+.btn-icon-pop svg, .btn-icon-pop > *:first-child {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.btn-icon-pop:hover svg, .btn-icon-pop:hover > *:first-child {
+  transform: scale(1.25) rotate(-8deg);
+}
+
+/* 12. Border draw — an outline traces around the button edge on hover */
+.btn-border-draw {
+  position: relative;
+  border: 1px solid transparent !important;
+}
+.btn-border-draw::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 1.5px solid hsl(var(--primary)); opacity: 0; transform: scale(1.12);
+  transition: opacity .3s ease, transform .3s cubic-bezier(.22,1,.36,1); pointer-events: none;
+}
+.btn-border-draw:hover::after { opacity: 1; transform: scale(1); }
+
+/* 13. Tilt — subtle 3D perspective tilt on hover, like a tipped card */
+.btn-tilt { transition: transform .3s ease; transform-style: preserve-3d; }
+.btn-tilt:hover { transform: perspective(300px) rotateX(6deg) rotateY(-4deg) translateY(-2px); }
+
+/* 14. Pulse ring — a ring expands outward once from the button on click */
+.btn-pulse-ring { position: relative; }
+.btn-pulse-ring::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 2px solid hsl(var(--primary)); opacity: 0; pointer-events: none;
+}
+.btn-pulse-ring:active::after { animation: btnPulseRing .5s ease-out; }
+@keyframes btnPulseRing {
+  0% { opacity: .8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+/* 15. Color sweep — background sweeps top-to-bottom on hover */
+.btn-color-sweep {
+  position: relative; overflow: hidden; z-index: 0;
+  transition: color .35s ease;
+}
+.btn-color-sweep::before {
+  content: ""; position: absolute; inset: 0; top: 100%;
+  background: hsl(var(--primary)); transition: top .35s cubic-bezier(.22,1,.36,1); z-index: -1;
+}
+.btn-color-sweep:hover::before { top: 0; }
+.btn-color-sweep:hover { color: hsl(var(--primary-foreground)); }
+
+/* 16. Elastic — squishes on click like a soft elastic band */
+.btn-elastic { transition: transform .2s cubic-bezier(.68,-0.55,.27,1.55); }
+.btn-elastic:active { transform: scaleX(1.12) scaleY(.88); }
+
+/* 17. Float — continuous gentle bob, draws the eye to a standout action */
+@keyframes btnFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.btn-float { animation: btnFloat 2.6s ease-in-out infinite; }
+.btn-float:hover { animation-play-state: paused; }
+
+/* 18. Depth shadow — shadow grows and shifts down-right on hover, suggesting lift */
+.btn-depth {
+  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 3px 3px 0 hsl(var(--dark) / .18);
+}
+.btn-depth:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 hsl(var(--dark) / .18);
+}
+.btn-depth:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 hsl(var(--dark) / .18);
+}
+
+/* 19. Avatar story ring — Instagram-style spinning gradient halo, blooms in
+   on hover with a soft gap between the ring and the avatar underneath. */
+@keyframes avatarRingSpin {
+  to { transform: rotate(360deg); }
+}
+.avatar-ring {
+  position: relative;
+  isolation: isolate;
+}
+.avatar-ring::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, hsl(var(--gold-dark)), #6b6560, #2b2a28, hsl(var(--gold-dark)));
+  opacity: 0;
+  transform: scale(.7) rotate(0deg);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
+  animation: avatarRingSpin 2.4s linear infinite;
+  animation-play-state: paused;
+  z-index: 0;
+}
+.group:hover .avatar-ring::before {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  animation-play-state: running;
+}
+.avatar-ring > * { position: relative; z-index: 1; }
+
+/* ==================== Uiverse.io community buttons ==================== */
+
+/* "See more" glow-blob button (Uiverse.io by Javierrocadev) - restyled so
+   the glow sits as a soft accent behind the label instead of a solid blob
+   covering the text; it's subtle at rest and only blooms on hover. */
+.btn-glow-blob {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.btn-glow-blob::before,
+.btn-glow-blob::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  z-index: 0;
+  border-radius: 9999px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, right 0.4s ease, filter 0.4s ease;
+}
+.btn-glow-blob::before {
+  right: -1rem;
+  width: 3rem;
+  height: 3rem;
+  background: #8b5cf6;
+  filter: blur(18px);
+}
+.btn-glow-blob::after {
+  right: -2.5rem;
+  width: 4rem;
+  height: 4rem;
+  background: hsl(var(--primary));
+  opacity: 0;
+  filter: blur(18px);
+}
+.btn-glow-blob:hover::before {
+  opacity: 0.55;
+  right: 0.5rem;
+  filter: blur(12px);
+}
+.btn-glow-blob:hover::after {
+  opacity: 0.4;
+  right: -1rem;
+}
+.btn-glow-blob:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.btn-glow-blob-label {
+  position: relative;
+  z-index: 10;
+}
+
+/* Login button (Uiverse.io by reglobby) */
+.uiverse-login-btn {
+  width: 112px;
+  height: 44px;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: linear-gradient(to bottom right, hsl(var(--primary)) 0%, hsl(var(--primary) / 0) 30%);
+  background-color: hsl(var(--primary) / 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+.uiverse-login-btn:hover,
+.uiverse-login-btn:focus {
+  background-color: hsl(var(--primary) / 0.7);
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  outline: none;
+}
+.uiverse-login-btn-inner {
+  width: 108px;
+  height: 40px;
+  border-radius: 11px;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+}
+.uiverse-login-btn-inner svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+/* "Book Appointment" bubble-burst button (Uiverse.io by SteveBloX) —
+   keeps the button's own background/text color untouched (bg-primary),
+   only adds the confetti-bubble hover animation using the theme color. */
+.btn-bubble-burst {
+  position: relative;
+  isolation: isolate;
+  transition: all 0.2s ease;
+}
+.btn-bubble-burst:active {
+  transform: scale(0.95);
+}
+.btn-bubble-burst::before,
+.btn-bubble-burst::after {
+  position: absolute;
+  content: "";
+  width: 150%;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.btn-bubble-burst:hover::before {
+  top: -70%;
+  background-image:
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, hsl(var(--primary)) 20%, transparent 30%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, hsl(var(--primary)) 15%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+    10% 10%, 18% 18%;
+  background-position: 50% 120%;
+  animation: btn-bubble-burst-top 0.6s ease;
+}
+@keyframes btn-bubble-burst-top {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+      50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+.btn-bubble-burst:hover::after {
+  bottom: -70%;
+  background-image:
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, hsl(var(--primary)) 15%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%),
+    radial-gradient(circle, hsl(var(--primary)) 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+  background-position: 50% 0%;
+  animation: btn-bubble-burst-bottom 0.6s ease;
+}
+@keyframes btn-bubble-burst-bottom {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0%;
+  }
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+/* "Add to Cart" gradient-glow button (Uiverse.io by Na3ar-17) */
+.uiverse-cart-btn {
+  border: none;
+  outline: none;
+  background-color: #3a3a3a;
+  width: 180px;
+  height: 56px;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+  margin: 0.5rem auto 0;
+}
+.uiverse-cart-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 106%;
+  height: 120%;
+  z-index: 0;
+  border-radius: inherit;
+  transition: all 0.3s;
+}
+.uiverse-cart-btn-gradient-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 106%;
+  height: 115%;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 0;
+  filter: blur(10px);
+  transition: all 0.3s;
+}
+.uiverse-cart-btn-gradient {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  transition: all 0.3s;
+  background-image: linear-gradient(
+    90deg,
+    hsl(226, 81%, 64%),
+    hsl(271, 81%, 64%),
+    hsl(316, 81%, 64%),
+    hsl(1, 81%, 64%),
+    hsl(46, 81%, 64%),
+    hsl(91, 81%, 64%),
+    hsl(136, 81%, 64%),
+    hsl(181, 81%, 64%)
+  );
+  animation: uiverse-cart-btn-rotate 2s linear infinite;
+  filter: blur(10px);
+}
+.uiverse-cart-btn-label {
+  position: relative;
+  z-index: 1;
+  width: 156px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 22px;
+  background-color: rgba(43, 43, 43, 1);
+  background-image: linear-gradient(180deg, rgb(43, 43, 43) 0%, rgb(68, 68, 68) 100%);
+}
+.uiverse-cart-btn:hover .uiverse-cart-btn-gradient-container {
+  transform: translate(-50%, -50%) scale(0.98);
+  filter: blur(5px);
+}
+.uiverse-cart-btn:hover .uiverse-cart-btn-gradient {
+  filter: blur(5px);
+}
+@keyframes uiverse-cart-btn-rotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.uiverse-continue-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.75em 2em;
+  border: hsl(var(--primary)) solid 0.15em;
+  border-radius: 0.5em;
+  color: hsl(var(--primary));
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+}
+.uiverse-continue-btn span,
+.uiverse-continue-btn svg {
+  z-index: 1;
+  position: relative;
+}
+.uiverse-continue-btn:hover {
+  color: hsl(var(--primary-foreground));
+}
+.uiverse-continue-btn:active {
+  border-color: hsl(var(--gold-dark));
+}
+.uiverse-continue-btn::after,
+.uiverse-continue-btn::before {
+  content: "";
+  position: absolute;
+  width: 6em;
+  aspect-ratio: 1;
+  background: hsl(var(--primary));
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+.uiverse-continue-btn::before {
+  left: 0;
+  transform: translateX(-5.5em);
+}
+.uiverse-continue-btn::after {
+  right: 0;
+  transform: translateX(5.5em);
+}
+.uiverse-continue-btn:hover::before {
+  transform: translateX(-0.7em);
+}
+.uiverse-continue-btn:hover::after {
+  transform: translateX(0.7em);
+}
+.uiverse-continue-btn:active::before,
+.uiverse-continue-btn:active::after {
+  background: hsl(var(--gold-dark));
+}

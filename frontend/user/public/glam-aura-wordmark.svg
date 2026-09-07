@@ -1,0 +1,40 @@
+<svg viewBox="0 0 620 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D8B896"/>
+      <stop offset="50%" stop-color="#9C6B45"/>
+      <stop offset="100%" stop-color="#654129"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem -->
+  <g stroke="url(#goldGrad)" stroke-width="3.2" stroke-linecap="round">
+      <line x1="90.00" y1="45.00" x2="90.00" y2="31.50"/>
+      <line x1="107.22" y1="48.43" x2="109.98" y2="41.77"/>
+      <line x1="121.82" y1="58.18" x2="131.37" y2="48.63"/>
+      <line x1="131.57" y1="72.78" x2="138.23" y2="70.02"/>
+      <line x1="135.00" y1="90.00" x2="148.50" y2="90.00"/>
+      <line x1="131.57" y1="107.22" x2="138.23" y2="109.98"/>
+      <line x1="121.82" y1="121.82" x2="131.37" y2="131.37"/>
+      <line x1="107.22" y1="131.57" x2="109.98" y2="138.23"/>
+      <line x1="90.00" y1="135.00" x2="90.00" y2="148.50"/>
+      <line x1="72.78" y1="131.57" x2="70.02" y2="138.23"/>
+      <line x1="58.18" y1="121.82" x2="48.63" y2="131.37"/>
+      <line x1="48.43" y1="107.22" x2="41.77" y2="109.98"/>
+      <line x1="45.00" y1="90.00" x2="31.50" y2="90.00"/>
+      <line x1="48.43" y1="72.78" x2="41.77" y2="70.02"/>
+      <line x1="58.18" y1="58.18" x2="48.63" y2="48.63"/>
+      <line x1="72.78" y1="48.43" x2="70.02" y2="41.77"/>
+  </g>
+  <circle cx="90" cy="90" r="44" fill="#0d0d0d"/>
+  <circle cx="90" cy="90" r="44" fill="none" stroke="url(#goldGrad)" stroke-width="2.8"/>
+  <text x="90" y="107" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-style="italic" font-size="58" fill="url(#goldGrad)">G</text>
+  <path fill="url(#goldGrad)" d="M 90 26 Q 90.9 31.1 96 32 Q 90.9 32.9 90 38 Q 89.1 32.9 84 32 Q 89.1 31.1 90 26 Z"/>
+
+  <!-- Divider -->
+  <line x1="168" y1="55" x2="168" y2="125" stroke="url(#goldGrad)" stroke-width="1"/>
+
+  <!-- Wordmark -->
+  <text x="192" y="95" font-family="Georgia, 'Times New Roman', serif" font-size="46" letter-spacing="4" fill="url(#goldGrad)">GLAM AURA</text>
+  <text x="192" y="122" font-family="Georgia, 'Times New Roman', serif" font-size="14" letter-spacing="6" fill="#C6A380" opacity="0.85">SALON &amp; GROOMING</text>
+</svg>

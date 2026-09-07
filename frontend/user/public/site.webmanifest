@@ -1,0 +1,22 @@
+{
+  "name": "Glam Aura — Premium Men's Grooming Lounge",
+  "short_name": "Glam Aura",
+  "description": "Book premium haircuts, beard grooming, and spa treatments online.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

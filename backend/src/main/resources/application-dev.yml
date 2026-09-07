@@ -1,0 +1,13 @@
+spring:
+  flyway:
+    clean-disabled: false
+
+logging:
+  level:
+    root: INFO
+    com.salon.backend: DEBUG
+    org.hibernate.SQL: WARN
+
+app:
+  seed:
+    enabled: true

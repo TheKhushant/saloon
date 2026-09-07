@@ -1,0 +1,14 @@
+spring:
+  flyway:
+    clean-disabled: true
+
+logging:
+  level:
+    root: WARN
+    com.salon.backend: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
+
+app:
+  seed:
+    enabled: false

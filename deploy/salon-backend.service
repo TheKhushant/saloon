@@ -1,0 +1,25 @@
+[Unit]
+Description=Salon Backend (Spring Boot)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=salon
+Group=salon
+WorkingDirectory=/opt/salon-backend
+EnvironmentFile=/opt/salon-backend/.env
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /opt/salon-backend/salon-backend.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=5
+
+# Basic hardening - safe defaults for a service that only needs to write logs
+# to stdout (captured by journald) and talk to Postgres over the network.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
